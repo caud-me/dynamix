@@ -7,8 +7,8 @@
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#151515",
-  "theme_color": "#151515",
+  "background_color": "#101010",
+  "theme_color": "#101010",
   "icons": [
     {
       "src": "assets/icons/dynamix.svg",

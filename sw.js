@@ -1,7 +1,7 @@
 /* sw.js - service worker for dynamix offline cache and auto-refresh */
 
 /* constants */
-const CACHE_NAME = "dynamix-v7";
+const CACHE_NAME = "dynamix-v8";
 const CACHE_RECENT_MS = 120000;
 const CORE_ASSETS = [
     "./",
@@ -67,6 +67,31 @@ self.addEventListener("fetch", function (event) {
     const url = new URL(event.request.url);
     const isHttp = url.protocol.startsWith("http");
     if (!isHttp) {
+        return;
+    }
+
+    const isNavigate = event.request.mode === "navigate";
+    if (isNavigate) {
+        // ive looked up on the internet on this one, navigate fallback return cached index page when offline
+        const navTask = fetch(event.request).then(function (netRes) {
+            if (netRes && netRes.status === 200) {
+                const cloneRes = netRes.clone();
+                caches.open(CACHE_NAME).then(function (cache) {
+                    cache.put("./index.html", cloneRes);
+                });
+            }
+            return netRes;
+        }).catch(function () {
+            return caches.open(CACHE_NAME).then(function (cache) {
+                return cache.match("./index.html").then(function (pageRes) {
+                    if (pageRes) {
+                        return pageRes;
+                    }
+                    return cache.match("./");
+                });
+            });
+        });
+        event.respondWith(navTask);
         return;
     }
 
