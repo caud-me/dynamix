@@ -2,3 +2,9 @@
 Thumbs.db
 desktop.ini
 *.bak
+GEMINI.md
+AGENTS.md
+.agent/
+.agents/
+_agent/
+_agents/
