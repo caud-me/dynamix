@@ -20,7 +20,7 @@ instruct_version: "3.6"
 - standalone optional & experimental modules:
   * keep optional or experimental features isolated in standalone files with safe guards so removing them leaves the core application running cleanly without editing core files.
   * keep runtime UI component files inside the app public folder even when a UI skill is loaded, and only remove unused demo files after confirming.
-  * preserve `localStorage` storage, offline seed hooks, relative HTML links, and service worker precache lists when syncing updates to an offline edition.
+  * preserve `localStorage` storage, offline seed hooks, relative HTML links, and service worker precache lists when syncing updates to an offline edition, and bump `CACHE_NAME` in `sw.js` whenever cached assets change.
 - single source of truth & helper reuse:
   * reuse existing shared helpers instead of writing parallel one-off versions for minor visual or behavioral tweaks.
   * design new helpers to be general and reusable across all containers rather than tying them to one location.
@@ -35,7 +35,7 @@ instruct_version: "3.6"
 - direct system migrations without legacy shims:
   * when upgrading to a new token, class, or component system, migrate styles, runtime components, and auxiliary modules (such as wave stylesheets, responsive overrides, and dev helpers) directly to the new contract instead of preserving backwards-compatibility aliases or mixing old and new patterns.
   * keep valuable existing UX modules (such as celebration waves, card stacks, and empty states), rewriting their internals cleanly onto the new tokens and DOM patterns.
-  * create `.bak` backups before large structural rewrites of shared runtime components or base stylesheets.
+  * create `.bak` backups before large structural rewrites of shared runtime components or base stylesheets, and ensure `.gitignore` excludes `*.bak` (plus OS junk like `.DS_Store` and `Thumbs.db`) before committing to git.
 
 ## 2. UI layout, styling & component consistency
 - ask layout before coding:
