@@ -195,6 +195,7 @@ function renderDeckScreen(ctx, deck, direction) {
     const topMeta = parts.length + " sections · " + questions.length + " cards";
     const brandCard = trBrandCard({
         logoText: DECK_BRAND_TEXT,
+        logoSvg: HOME_BRAND_SVG,
         subtext: "",
         topRight: topMeta,
         title: shortTitle,

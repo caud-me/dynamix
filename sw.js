@@ -1,7 +1,7 @@
 /* sw.js - service worker for dynamix offline cache and auto-refresh */
 
 /* constants */
-const CACHE_NAME = "dynamix-v8";
+const CACHE_NAME = "dynamix-v9";
 const CACHE_RECENT_MS = 120000;
 const CORE_ASSETS = [
     "./",
